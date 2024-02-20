@@ -15,6 +15,12 @@ require("lazy").setup({
   "nvim-treesitter/nvim-treesitter-context",
   "stevearc/dressing.nvim",
   "farmergreg/vim-lastplace",
+  {
+    "akinsho/bufferline.nvim",
+    version = "*",
+    dependencies = "nvim-tree/nvim-web-devicons",
+    config = function() require("bufferline").setup() end,
+  },
   {"w0ng/vim-hybrid", name="hybrid", lazy = false, priority = 1000},
   {"NvChad/nvim-colorizer.lua", config = function() require("colorizer").setup() end},
   {
