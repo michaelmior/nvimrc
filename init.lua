@@ -33,3 +33,6 @@ vim.keymap.set('n', '<right>', '<cmd>:bn<CR>')
 vim.keymap.set('n', '<left>', '<cmd>:bp<CR>')
 vim.keymap.set('n', '<up>', '<cmd>:tabn<CR>')
 vim.keymap.set('n', '<down>', '<cmd>:tabp<CR>')
+
+-- C-c to close buffer but keep window
+vim.keymap.set('n', '<C-c>', '<cmd>:bp|bd #<CR>', { noremap = true, silent = true })
