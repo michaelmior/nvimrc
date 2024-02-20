@@ -16,6 +16,7 @@ require("lazy").setup({
   "stevearc/dressing.nvim",
   "farmergreg/vim-lastplace",
   {"lewis6991/gitsigns.nvim", opts = {}},
+  {'akinsho/git-conflict.nvim', version = "*", config = true},
   {"Exafunction/codeium.vim", event = "BufEnter"},
   {
     "akinsho/bufferline.nvim",
