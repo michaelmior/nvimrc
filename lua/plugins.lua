@@ -19,6 +19,17 @@ require("lazy").setup({
   {"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
   {'akinsho/git-conflict.nvim', version = "*", config = true},
   {
+    "nvim-lualine/lualine.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    config = function()
+      require('lualine').setup {
+        options = {
+          theme = 'ayu_dark'
+        }
+      }
+    end,
+  },
+  {
     "ghillb/cybu.nvim",
     version = "*",
     dependencies = {"nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
