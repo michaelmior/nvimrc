@@ -15,6 +15,7 @@ require("lazy").setup({
   "nvim-treesitter/nvim-treesitter-context",
   "stevearc/dressing.nvim",
   "farmergreg/vim-lastplace",
+  {"lewis6991/gitsigns.nvim", opts = {}},
   {"Exafunction/codeium.vim", event = "BufEnter"},
   {
     "akinsho/bufferline.nvim",
