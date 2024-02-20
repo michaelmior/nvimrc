@@ -32,8 +32,8 @@ vim.opt.splitbelow = true
 vim.opt.splitright = true
 
 -- Quickly switch between buffers and tabs
-vim.keymap.set('n', '<C-j>', '<cmd>:bprev<CR>')
-vim.keymap.set('n', '<right>', '<cmd>:bn<CR>')
+vim.keymap.set('n', '<C-j>', '<Plug>(CybuPrev)<CR>')
+vim.keymap.set('n', '<right>', '<Plug>(CybuNext)<CR>')
 vim.keymap.set('n', '<left>', '<cmd>:bp<CR>')
 vim.keymap.set('n', '<up>', '<cmd>:tabn<CR>')
 vim.keymap.set('n', '<down>', '<cmd>:tabp<CR>')

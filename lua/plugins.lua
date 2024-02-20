@@ -18,6 +18,12 @@ require("lazy").setup({
   {"lewis6991/gitsigns.nvim", opts = {}},
   {"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
   {'akinsho/git-conflict.nvim', version = "*", config = true},
+  {
+    "ghillb/cybu.nvim",
+    version = "*",
+    dependencies = {"nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
+    config = true
+  },
   {"Exafunction/codeium.vim", event = "BufEnter"},
   {
     "akinsho/bufferline.nvim",
