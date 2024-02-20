@@ -26,3 +26,10 @@ vim.opt.ttyfast = true              -- It's ok vim, our terminal is fast
 vim.opt.hidden = true               -- Allow hiding of hidden buffers
 vim.opt.cursorline = true           -- Highlight the current line
 vim.opt.colorcolumn = '80'          -- Show a right margin
+
+-- Quickly switch between buffers and tabs
+vim.keymap.set('n', '<C-j>', '<cmd>:bprev<CR>')
+vim.keymap.set('n', '<right>', '<cmd>:bn<CR>')
+vim.keymap.set('n', '<left>', '<cmd>:bp<CR>')
+vim.keymap.set('n', '<up>', '<cmd>:tabn<CR>')
+vim.keymap.set('n', '<down>', '<cmd>:tabp<CR>')
