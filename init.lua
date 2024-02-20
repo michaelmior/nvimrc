@@ -27,6 +27,10 @@ vim.opt.hidden = true               -- Allow hiding of hidden buffers
 vim.opt.cursorline = true           -- Highlight the current line
 vim.opt.colorcolumn = '80'          -- Show a right margin
 
+-- Open new split panes below and right
+vim.opt.splitbelow = true
+vim.opt.splitright = true
+
 -- Quickly switch between buffers and tabs
 vim.keymap.set('n', '<C-j>', '<cmd>:bprev<CR>')
 vim.keymap.set('n', '<right>', '<cmd>:bn<CR>')
@@ -36,3 +40,11 @@ vim.keymap.set('n', '<down>', '<cmd>:tabp<CR>')
 
 -- C-c to close buffer but keep window
 vim.keymap.set('n', '<C-c>', '<cmd>:bp|bd #<CR>', { noremap = true, silent = true })
+
+-- Allow Control-Z to work in insert mode
+vim.keymap.set('n', '<C-Z>', '<cmd>:suspend<CR>', { noremap = true, silent = true })
+vim.keymap.set('i', '<C-Z>', '<C-O><C-Z>', { noremap = true, silent = true })
+
+-- Move paragraphs by backspace/return
+vim.keymap.set({'n', 'o', 'v'}, '<BS>', '{', { noremap = true, silent = true })
+vim.keymap.set({'n', 'o', 'v'}, '<CR>', '}', { noremap = true, silent = true })
