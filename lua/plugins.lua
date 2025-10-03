@@ -13,21 +13,22 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
   "nvim-treesitter/nvim-treesitter-context",
-  "stevearc/dressing.nvim",
+  "lbrayner/vim-rzip",
   "farmergreg/vim-lastplace",
   {"lewis6991/gitsigns.nvim", opts = {}},
   {"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
-  {'akinsho/git-conflict.nvim', version = "*", config = true},
+  "darfink/vim-plist",
+  "alker0/chezmoi.vim",
   {
-    "nvim-lualine/lualine.nvim",
-    dependencies = { "nvim-tree/nvim-web-devicons" },
+    "nvim-telescope/telescope.nvim",
+    branch = "0.1.x",
+    dependencies = { "nvim-lua/plenary.nvim" },
     config = function()
-      require('lualine').setup {
-        options = {
-          theme = 'ayu_dark'
-        }
-      }
-    end,
+      local builtin = require('telescope.builtin')
+      vim.keymap.set("n", "<C-p>", builtin.find_files, {})
+      vim.keymap.set("n", "<C-S-p>", builtin.buffers, {})
+      vim.keymap.set("n", "<C-g>", builtin.live_grep, {})
+    end
   },
   {
     "ghillb/cybu.nvim",
@@ -35,20 +36,9 @@ require("lazy").setup({
     dependencies = {"nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
     config = true
   },
-  {"Exafunction/codeium.vim", event = "BufEnter"},
-  {
-    "akinsho/bufferline.nvim",
-    version = "*",
-    dependencies = "nvim-tree/nvim-web-devicons",
-    config = function() require("bufferline").setup() end,
-  },
+  {"Exafunction/windsurf.vim", event = "BufEnter"},
   {"w0ng/vim-hybrid", name="hybrid", lazy = false, priority = 1000},
   {"NvChad/nvim-colorizer.lua", config = function() require("colorizer").setup() end},
-  {
-    "numToStr/Comment.nvim",
-    lazy = false,
-    config = function() require("Comment").setup() end,
-  },
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
@@ -114,27 +104,12 @@ require("lazy").setup({
       vim.keymap.set("n", "<leader>a", "<cmd>AerialToggle!<CR>")
     end,
   },
-  {
-    "scalameta/nvim-metals",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      {"j-hui/fidget.nvim", opts = {}},
-    },
-    ft = { "scala", "sbt", "java" },
-    config = function(self, metals_config)
-      local nvim_metals_group = vim.api.nvim_create_augroup("nvim-metals", { clear = true })
-      vim.api.nvim_create_autocmd("FileType", {
-        pattern = self.ft,
-        callback = function()
-          require("metals").initialize_or_attach(metals_config)
-        end,
-        group = nvim_metals_group,
-      })
-    end,
-  },
-
+  --
   -- LSP configuration
-  {"williamboman/mason.nvim", config = function() require("mason").setup() end},
+  {
+    "mason-org/mason.nvim",
+    opts = {}
+  },
   {
     "williamboman/mason-lspconfig.nvim",
     config = function()
@@ -146,7 +121,7 @@ require("lazy").setup({
           "cmake",
           "docker_compose_language_service",
           "dockerls",
-          "eslint",
+          "emmylua_ls",
           "gradle_ls",
           "html",
           "jsonls",
@@ -156,7 +131,7 @@ require("lazy").setup({
           "sqlls",
           "tflint",
           "vimls",
-          "volar",
+          "vue_ls",
         },
       }
     end,
@@ -164,37 +139,28 @@ require("lazy").setup({
   {
     "neovim/nvim-lspconfig",
     config = function()
-      require"lspconfig".bashls.setup{}
-      require"lspconfig".biome.setup{}
-      require"lspconfig".clangd.setup{}
-      require"lspconfig".cmake.setup{}
-      require"lspconfig".docker_compose_language_service.setup{}
-      require"lspconfig".dockerls.setup{}
-      require"lspconfig".eslint.setup{}
-      require"lspconfig".gradle_ls.setup{}
-      require"lspconfig".html.setup{}
-      require"lspconfig".jsonls.setup{}
-      require"lspconfig".lua_ls.setup{}
-      require"lspconfig".pylyzer.setup{}
-      require"lspconfig".rust_analyzer.setup{}
-      require"lspconfig".sqlls.setup{}
-      require"lspconfig".tflint.setup{}
-      require"lspconfig".vimls.setup{}
-      require"lspconfig".volar.setup{}
+      vim.lsp.enable("bashls")
+      vim.lsp.enable("biome")
+      vim.lsp.enable("clangd")
+      vim.lsp.enable("cmake")
+      vim.lsp.enable("docker_compose_language_service")
+      vim.lsp.enable("dockerls")
+      vim.lsp.enable("emmylua_ls")
+      vim.lsp.enable("gradle_ls")
+      vim.lsp.enable("html")
+      vim.lsp.enable("jsonls")
+      vim.lsp.enable("lua_ls")
+      vim.lsp.enable("pylyzer")
+      vim.lsp.enable("rust_analyzer")
+      vim.lsp.enable("sqlls")
+      vim.lsp.enable("tflint")
+      vim.lsp.enable("vimls")
+      vim.lsp.enable("vue_ls")
     end,
   },
-
   {
-    "folke/flash.nvim",
-    event = "VeryLazy",
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
     opts = {},
-    -- stylua: ignore
-    keys = {
-      { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-      { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-      { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-      { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-      { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
-    },
-  }
+  },
 })
