@@ -18,7 +18,13 @@ require("lazy").setup({
   {"lewis6991/gitsigns.nvim", opts = {}},
   {"windwp/nvim-autopairs", event = "InsertEnter", opts = {}},
   "darfink/vim-plist",
-  "alker0/chezmoi.vim",
+  {
+    'alker0/chezmoi.vim',
+    lazy = false,
+    init = function()
+      vim.g['chezmoi#use_tmp_buffer'] = true
+    end,
+  },
   {
     "nvim-telescope/telescope.nvim",
     branch = "0.1.x",
@@ -78,7 +84,15 @@ require("lazy").setup({
             "yaml",
           },
           sync_install = false,
-          highlight = { enable = true },
+          highlight = {
+            enable = true,
+            disable = function()
+              -- check if 'filetype' option includes 'chezmoitmpl'
+              if string.find(vim.bo.filetype, 'chezmoitmpl') then
+                return true
+              end
+            end,
+          },
           indent = { enable = true },
         })
     end
