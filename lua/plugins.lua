@@ -47,54 +47,50 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdate",
-    config = function ()
-      local configs = require("nvim-treesitter.configs")
-
-      configs.setup({
-          ensure_installed = {
-            "bibtex",
-            "c",
-            "cmake",
-            "cpp",
-            "css",
-            "csv",
-            "diff",
-            "dockerfile",
-            "dot",
-            "doxygen",
-            "git_config",
-            "git_rebase",
-            "html",
-            "javascript",
-            "json",
-            "lua",
-            "perl",
-            "php",
-            "query",
-            "rust",
-            "scala",
-            "sql",
-            "tmux",
-            "typescript",
-            "vim",
-            "vimdoc",
-            "vue",
-            "xml",
-            "yaml",
-          },
-          sync_install = false,
-          highlight = {
-            enable = true,
-            disable = function()
-              -- check if 'filetype' option includes 'chezmoitmpl'
-              if string.find(vim.bo.filetype, 'chezmoitmpl') then
-                return true
-              end
-            end,
-          },
-          indent = { enable = true },
-        })
-    end
+    opts = {
+      ensure_installed = {
+        "bibtex",
+        "c",
+        "cmake",
+        "cpp",
+        "css",
+        "csv",
+        "diff",
+        "dockerfile",
+        "dot",
+        "doxygen",
+        "git_config",
+        "git_rebase",
+        "html",
+        "javascript",
+        "json",
+        "lua",
+        "perl",
+        "php",
+        "query",
+        "rust",
+        "scala",
+        "sql",
+        "tmux",
+        "typescript",
+        "vim",
+        "vimdoc",
+        "vue",
+        "xml",
+        "yaml",
+      },
+      sync_install = false,
+      highlight = {
+        enable = true,
+        disable = function()
+          -- check if 'filetype' option includes 'chezmoitmpl'
+          if string.find(vim.bo.filetype, 'chezmoitmpl') then
+            return true
+          end
+        end,
+      },
+      indent = { enable = true },
+    }
   },
   {
     "stevearc/aerial.nvim",
