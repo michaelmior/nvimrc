@@ -42,7 +42,6 @@ require("lazy").setup({
     dependencies = {"nvim-tree/nvim-web-devicons", "nvim-lua/plenary.nvim"},
     config = true
   },
-  {"Exafunction/windsurf.vim", event = "BufEnter"},
   {"w0ng/vim-hybrid", name="hybrid", lazy = false, priority = 1000},
   {"NvChad/nvim-colorizer.lua", config = function() require("colorizer").setup() end},
   {
