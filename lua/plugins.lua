@@ -134,7 +134,6 @@ require("lazy").setup({
           "html",
           "jsonls",
           "lua_ls",
-          "pylyzer",
           "rust_analyzer",
           "sqlls",
           "tflint",
