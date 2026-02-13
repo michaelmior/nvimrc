@@ -48,3 +48,14 @@ vim.keymap.set('i', '<C-Z>', '<C-O><C-Z>', { noremap = true, silent = true })
 -- Move paragraphs by backspace/return
 vim.keymap.set({'n', 'o', 'v'}, '<BS>', '{', { noremap = true, silent = true })
 vim.keymap.set({'n', 'o', 'v'}, '<CR>', '}', { noremap = true, silent = true })
+
+-- Automatically reload files if unmodified
+vim.o.autoread = true
+vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
+  callback = function()
+    -- Only check if the buffer is not modified
+    if vim.fn.mode() ~= 'c' then
+      vim.cmd('checktime')
+    end
+  end,
+})
