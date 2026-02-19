@@ -157,7 +157,6 @@ require("lazy").setup({
       vim.lsp.enable("html")
       vim.lsp.enable("jsonls")
       vim.lsp.enable("lua_ls")
-      vim.lsp.enable("pylyzer")
       vim.lsp.enable("rust_analyzer")
       vim.lsp.enable("sqlls")
       vim.lsp.enable("tflint")
