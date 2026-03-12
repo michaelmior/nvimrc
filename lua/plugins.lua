@@ -12,6 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  "HiPhish/jinja.vim",
   "nvim-treesitter/nvim-treesitter-context",
   "lbrayner/vim-rzip",
   "farmergreg/vim-lastplace",
