@@ -59,3 +59,30 @@ vim.api.nvim_create_autocmd({ "FocusGained", "BufEnter" }, {
     end
   end,
 })
+
+local commit_diff_group = vim.api.nvim_create_augroup("GitCommitDiff", { clear = true })
+
+local function open_commit_diff()
+  if vim.b.commit_diff_open then
+    return
+  end
+  vim.b.commit_diff_open = true
+
+  vim.cmd("vertical rightbelow new")
+  vim.bo.buftype = "nofile"
+  vim.bo.bufhidden = "wipe"
+  vim.bo.buflisted = false
+  vim.bo.swapfile = false
+  vim.bo.filetype = "diff"
+
+  local diff = vim.fn.systemlist("git -c core.pager=cat diff --cached --no-ext-diff")
+  vim.api.nvim_buf_set_lines(0, 0, -1, false, diff)
+  vim.cmd("normal! gg")
+  vim.cmd("wincmd p")
+end
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = commit_diff_group,
+  pattern = "gitcommit",
+  callback = open_commit_diff,
+})
