@@ -84,5 +84,17 @@ end
 vim.api.nvim_create_autocmd("FileType", {
   group = commit_diff_group,
   pattern = "gitcommit",
-  callback = open_commit_diff,
+  callback = function()
+    open_commit_diff()
+
+    vim.cmd([[
+      cnoreabbrev <buffer> <expr> q   getcmdtype() == ':' && getcmdline() == 'q'   ? 'qa'   : 'q'
+      cnoreabbrev <buffer> <expr> wq  getcmdtype() == ':' && getcmdline() == 'wq'  ? 'wqa'  : 'wq'
+      cnoreabbrev <buffer> <expr> x   getcmdtype() == ':' && getcmdline() == 'x'   ? 'xa'   : 'x'
+
+      cnoreabbrev <buffer> <expr> Q   getcmdtype() == ':' && getcmdline() == 'Q'   ? 'qa'   : 'Q'
+      cnoreabbrev <buffer> <expr> WQ  getcmdtype() == ':' && getcmdline() == 'WQ'  ? 'wqa'  : 'WQ'
+      cnoreabbrev <buffer> <expr> X   getcmdtype() == ':' && getcmdline() == 'X'   ? 'xa'   : 'X'
+    ]])
+  end,
 })
